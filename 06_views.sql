@@ -1,6 +1,6 @@
 -- =========================================================
 -- 06_views.sql
--- Saved queries (views). Run after 04.
+-- Saved queries (views).
 -- =========================================================
 
 USE food_delivery_app;
