@@ -1,13 +1,9 @@
--- =========================================================
 -- 04_fixes_and_more_data.sql
--- Data fixes, then more customers, menu items and orders. Run after 03.
--- =========================================================
+-- Data fixes, then more customers, menu items and orders. 
 
 USE food_delivery_app;
 
--- =========================================================
 -- PART 1: DATA FIXES (found with the data quality checks)
--- =========================================================
 
 -- Fix 1: O101 total was 200 but it only had a 120 item. Add French Fries (80).
 INSERT INTO Order_Item (order_id, item_id, quantity, item_price) VALUES ('O101', 'M102', 1, 80);
@@ -32,21 +28,16 @@ UPDATE Customer   SET city = 'Pune' WHERE customer_id = 'C101';
 UPDATE Restaurant SET location = 'MG Road' WHERE restaurant_id = 'R101';
 
 
--- =========================================================
 -- PART 2: REALISTIC DATA (37 new orders, July to October 2026)
--- =========================================================
 
--- ---------------------------------------------------------
 -- 2.1 Restore the delivery row deleted in the DELETE practice
--- ---------------------------------------------------------
+
 INSERT INTO Delivery (delivery_id, order_id, delivery_person, delivery_status)
 VALUES ('D108', 'O108', 'Kunal', 'Cancelled');
 
 
--- ---------------------------------------------------------
 -- 2.2 Finish old orders (2 months old orders cannot still be "Preparing")
 -- Orders, Delivery and Payment are updated TOGETHER
--- ---------------------------------------------------------
 
 -- These become Delivered
 UPDATE Orders
@@ -76,10 +67,8 @@ SET payment_status = 'Refunded'
 WHERE order_id IN ('O111','O117');
 
 
--- ---------------------------------------------------------
 -- 2.3 Use a small pool of 8 delivery persons
 -- (names like Amit and Varun are removed because they are customer names too)
--- ---------------------------------------------------------
 UPDATE Delivery SET delivery_person = 'Suresh' WHERE delivery_id IN ('D101','D109','D117');
 UPDATE Delivery SET delivery_person = 'Manoj'  WHERE delivery_id IN ('D102','D110','D118');
 UPDATE Delivery SET delivery_person = 'Raj'    WHERE delivery_id IN ('D103','D111','D119');
@@ -90,9 +79,7 @@ UPDATE Delivery SET delivery_person = 'Ravi'   WHERE delivery_id IN ('D107','D11
 UPDATE Delivery SET delivery_person = 'Sameer' WHERE delivery_id IN ('D108','D116');
 
 
--- ---------------------------------------------------------
 -- 2.4 More menu items (25 new, so every restaurant has 2-3 items)
--- ---------------------------------------------------------
 INSERT INTO Menu_Item
 (item_id, restaurant_id, item_name, price, category)
 VALUES
@@ -123,10 +110,8 @@ VALUES
 ('M145','R120','Egg Curry',170,'Main Course');
 
 
--- ---------------------------------------------------------
 -- 2.5 Three customers who have NOT ordered yet
 -- (age is required because the column is NOT NULL)
--- ---------------------------------------------------------
 INSERT INTO Customer
 (customer_id, name, phone, email, street, city, pincode, age)
 VALUES
@@ -135,10 +120,9 @@ VALUES
 ('C123','Divya','9876543232','divya@example.com','9 Nagar Road','Pune','411014',21);
 
 
--- ---------------------------------------------------------
 -- 2.6 Orders (37 new, July to October 2026)
 -- Restaurants R119 and R120 get no orders on purpose
--- ---------------------------------------------------------
+
 INSERT INTO Orders
 (order_id, customer_id, restaurant_id, order_date, status, total_amount)
 VALUES
@@ -181,10 +165,9 @@ VALUES
 ('O157','C116','R105','2026-10-23','Preparing',460);
 
 
--- ---------------------------------------------------------
 -- 2.7 Order items (some orders have 2-3 items and quantity above 1)
 -- item_price is the menu price at the time of the order
--- ---------------------------------------------------------
+
 INSERT INTO Order_Item
 (order_id, item_id, quantity, item_price)
 VALUES
@@ -260,11 +243,9 @@ VALUES
 ('O157','M110',1,200);
 
 
--- ---------------------------------------------------------
 -- 2.8 Payments
 -- Delivered = Successful | Cancelled = Refunded
 -- In progress: UPI/Card = Successful, Cash = Pending
--- ---------------------------------------------------------
 INSERT INTO Payment
 (payment_id, order_id, payment_method, payment_status)
 VALUES
@@ -307,9 +288,8 @@ VALUES
 ('P157','O157','Card','Successful');
 
 
--- ---------------------------------------------------------
 -- 2.9 Deliveries (same 8 delivery persons, status same as the order)
--- ---------------------------------------------------------
+
 INSERT INTO Delivery
 (delivery_id, order_id, delivery_person, delivery_status)
 VALUES
