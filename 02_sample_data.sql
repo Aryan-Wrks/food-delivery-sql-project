@@ -1,7 +1,6 @@
--- =========================================================
+
 -- 02_sample_data.sql
--- Original sample data (20 rows per table). Run after 01.
--- =========================================================
+-- Original sample data (20 rows per table).
 
 USE food_delivery_app;
 
