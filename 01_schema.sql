@@ -1,7 +1,6 @@
--- =========================================================
 -- 01_schema.sql
 -- Creates the database and the 7 tables
--- =========================================================
+
 
 DROP DATABASE IF EXISTS food_delivery_app;
 CREATE DATABASE food_delivery_app;
