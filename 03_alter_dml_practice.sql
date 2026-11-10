@@ -1,7 +1,6 @@
--- =========================================================
+
 -- 03_alter_dml_practice.sql
--- ALTER TABLE, UPDATE and DELETE practice (college practical). Run after 02.
--- =========================================================
+-- ALTER TABLE, UPDATE and DELETE practice (college practical). 
 
 USE food_delivery_app;
 
@@ -36,7 +35,7 @@ ALTER TABLE Customer MODIFY age INT NOT NULL;
 -- ADD CONSTRAINT
 ALTER TABLE Customer ADD CONSTRAINT chk_customer_age CHECK (age >= 0);
 
--- UPDATE practice (these two are repaired later in file 04)
+-- UPDATE practice 
 UPDATE Customer SET city = 'Mumbai' WHERE customer_id = 'C101';
 UPDATE Orders SET status = 'Delivered' WHERE order_id = 'O104';
 
@@ -70,5 +69,5 @@ ALTER TABLE Customer ADD CONSTRAINT unique_alternate_phone UNIQUE (alternate_pho
 ALTER TABLE Customer DROP CONSTRAINT unique_alternate_phone;
 ALTER TABLE Customer DROP COLUMN alternate_phone;
 
--- DELETE practice (the row is restored in file 04)
+-- DELETE practice 
 DELETE FROM Delivery WHERE delivery_id = 'D108';
